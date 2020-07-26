@@ -1,0 +1,5 @@
+-> Style: NoActionBar
+-> Project Gradle: All Projects e:      maven { url 'https://jitpack.io' }
+-> app gradle er: dependencies  e:      implementation 'com.squareup.picasso:picasso:2.5.2'     implementation 'com.github.hajiyevelnur92:intentanimation:1.0'
+-> Manifest: <uses-permission android:name="android.permission.INTERNET"/>
+-> Button red color code: F40B0B

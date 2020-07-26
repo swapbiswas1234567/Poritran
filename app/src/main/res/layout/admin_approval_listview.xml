@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="250dp"
+           android:background="@drawable/borderblack">
+           <ImageView
+               android:id="@+id/photoWA"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_margin="2dp"
+               android:src="@drawable/logo"/>
+       </LinearLayout>
+
+        <TextView
+            android:id="@+id/nameWA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Swapnil Biswas"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:fontFamily="serif"/>
+
+        <TextView
+            android:id="@+id/phoneWA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="01759957277"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:fontFamily="serif"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request ID"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/idWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NID"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/nidWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Present Address"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/addressWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of Family Member"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/memberWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount (Taka)"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/amountWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textStyle="italic"/>
+
+        <TextView
+            android:id="@+id/commentWA"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <Button
+            android:id="@+id/cancelWA"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="#EA1D1D"
+            android:text="CANCEL REQUEST"
+            android:fontFamily="serif"
+            android:textColor="#fff"/>
+
+    </LinearLayout>
+
+</LinearLayout>
