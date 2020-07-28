@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +43,7 @@ public class AddRequest extends AppCompatActivity {
     TextView post,available;
     ImageView doneePhoto;
     Button upload;
-    Button home, add, pending, approved, my, logout;
+    Button home, up, pending, approved, my, logout;
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
@@ -93,6 +92,24 @@ public class AddRequest extends AppCompatActivity {
                 if(validation()){
                     postRequest();
                 }
+            }
+        });
+
+        pending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
+                startActivity(intent);
+                customType(AddRequest.this, "left-to-right");
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, DonorActivity.class);
+                startActivity(intent);
+                customType(AddRequest.this, "right-to-left");
             }
         });
 
@@ -206,8 +223,6 @@ public class AddRequest extends AppCompatActivity {
 
             }
         });
-        //MAX_REQ_AMOUNT = 10000;
-        ///MAX_REQ_COUNT = 5;
     }
 
     void setTotalAvailableRequest(){
@@ -268,6 +283,13 @@ public class AddRequest extends AppCompatActivity {
         available = findViewById(R.id.availableAddReq);
         doneePhoto = findViewById(R.id.doneePhotoAddReq);
         upload = findViewById(R.id.uploadAddReq);
+
+        home = findViewById(R.id.homeAR);
+        pending = findViewById(R.id.pendingAR);
+        approved = findViewById(R.id.approvedAR);
+        my = findViewById(R.id.myAR);
+        logout = findViewById(R.id.logoutAR);
+        up = findViewById(R.id.uploadAR);
 
         progressDialog = new ProgressDialog(AddRequest.this);
 

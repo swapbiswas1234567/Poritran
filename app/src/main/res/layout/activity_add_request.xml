@@ -189,7 +189,6 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/pendingAR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -338,6 +337,7 @@
 
 
             <Button
+                android:id="@+id/pendingAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -369,6 +369,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
+                android:id="@+id/uploadAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -384,6 +385,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
+                android:id="@+id/myAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -400,6 +402,7 @@
 
 
             <Button
+                android:id="@+id/logoutAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
