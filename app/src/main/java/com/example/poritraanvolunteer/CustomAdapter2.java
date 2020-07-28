@@ -23,6 +23,8 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -102,7 +104,7 @@ public class CustomAdapter2 extends BaseAdapter {
         final ImageView imageView2=templateView.findViewById(R.id.imageView2SP);
 
         final String reqId=transactionArrayList.get(position).reqId;
-
+        final String volunteerNid=transactionArrayList.get(position).volNid;
 
         Button selectPictureButton=templateView.findViewById(R.id.selectPictureButtonSP);
         Button uploadPictureButton=templateView.findViewById(R.id.uploadPictureButtonSP);
@@ -165,10 +167,43 @@ public class CustomAdapter2 extends BaseAdapter {
                         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                String reqUri = uri.toString();
+                                /*Getting the download uri*/
+                                String downloadUri = uri.toString();
+                                /*CODE FOR CHANGING THE STATUS*/
+                                /*Getting a reference to the request tree*/
+                                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                                /*setting the status of that request tree to  3*/
+                                DatabaseReference myReference=firebaseDatabase.getReference
+                                        ("Request/"+volunteerNid+"/"+reqId);
+                                myReference.child("status").setValue("3");
+                                /*CODE FOR COPYING THE TREE*/
+                                /*getting reference to the new root*/
+                                FirebaseDatabase firebaseDatabase2=FirebaseDatabase.getInstance();
+                                DatabaseReference myReference2=firebaseDatabase.getReference
+                                        ("CompletedDonations/"+FunctionVariable.NID);
+
+                                myReference2.child("amount").setValue(transactionArrayList.get(position).amount);
+                                myReference2.child("comment").setValue(transactionArrayList.get(position).comment);
+                                myReference2.child("confirmationUri").setValue("");
+                                myReference2.child("donatedByName").setValue(donorNameArrayList.get(position));
+                                myReference2.child("donatedByNid").setValue(donorNidArrayList.get(position));
+                                myReference2.child("familyMember").setValue(transactionArrayList.get(position).familyMember);
+                                myReference2.child("name").setValue(transactionArrayList.get(position).name);
+                                myReference2.child("nid").setValue(transactionArrayList.get(position).nid);
+                                myReference2.child("phoneNo").setValue(transactionArrayList.get(position).phoneNo);
+                                myReference2.child("presentAddress").setValue(transactionArrayList.get(position).presentAddress);
+                                myReference2.child("reqId").setValue(transactionArrayList.get(position).reqId);
+                                myReference2.child("reqUri").setValue(transactionArrayList.get(position).reqUri);
+                                myReference2.child("shared").setValue(transactionArrayList.get(position).shared);
+                                myReference2.child("status").setValue("3");
+                                myReference2.child("volNid").setValue(transactionArrayList.get(position).volNid);
+                                myReference2.child("confirmationPhotoUri").setValue(downloadUri);
+
+
+
                                 //Log.d("TAG2","reqUri="+reqUri);
                                 Log.d("TAGA","Download Uri is :");
-                                Log.d("TAGA",reqUri);
+                                Log.d("TAGA",downloadUri);
                                 progressDialog.dismiss();
                                 Toast.makeText(context,"Successfully uploaded information",Toast.LENGTH_SHORT).show();
                             }
