@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -38,11 +37,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static maes.tech.intentanim.CustomIntent.customType;
+
 public class AddRequest extends AppCompatActivity {
 
     TextView post,available;
     ImageView doneePhoto;
     Button upload;
+    Button home, add, pending, approved, my, logout;
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
@@ -152,6 +154,10 @@ public class AddRequest extends AppCompatActivity {
                             mDataBaseRef.child(key).setValue(t);
                             progressDialog.dismiss();
                             toast("Your request has been posted for donation");
+                            Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
+                            startActivity(intent);
+                            customType(AddRequest.this, "left-to-right");
+
                         }
                     });
                 }
