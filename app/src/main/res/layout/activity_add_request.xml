@@ -189,13 +189,14 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/pendingAR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Requester's Present Address"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="serif"
+                    android:text="Requester's Present Address"
                     android:textColor="#000"
                     android:textSize="14sp"
-                    android:fontFamily="serif"
                     android:textStyle="italic" />
 
                 <EditText
@@ -305,6 +306,7 @@
             android:weightSum="10">
 
             <Button
+                android:id="@+id/homeAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -351,6 +353,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
+                android:id="@+id/approvedAR"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
