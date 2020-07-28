@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,19 +31,7 @@ public class MyWork extends AppCompatActivity {
     ArrayList<Transaction> completedRequests;
 
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(MyWork.this);
-        alertDialogBuilder.setMessage("Are you sure want to exit?");
-        alertDialogBuilder.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        moveTaskToBack(true);
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(1);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -108,7 +97,18 @@ public class MyWork extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(MyWork.this);
+                alertDialogBuilder.setMessage("Are you sure want to logout?");
+                alertDialogBuilder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MyWork.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
     }

@@ -37,19 +37,7 @@ public class SubmitPhoto extends AppCompatActivity {
     ArrayList <String> donorNidArrayList;
 
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(SubmitPhoto.this);
-        alertDialogBuilder.setMessage("Are you sure want to exit?");
-        alertDialogBuilder.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        moveTaskToBack(true);
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(1);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -178,7 +166,18 @@ public class SubmitPhoto extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(SubmitPhoto.this);
+                alertDialogBuilder.setMessage("Are you sure want to logout?");
+                alertDialogBuilder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(SubmitPhoto.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         });
     }
