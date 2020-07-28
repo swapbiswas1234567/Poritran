@@ -1,5 +1,7 @@
 package com.example.poritraanvolunteer;
 
+import androidx.annotation.NonNull;
+
 public class Transaction {
     String volNid;
 
@@ -36,6 +38,8 @@ public class Transaction {
         this.reqId = reqId;
         status = 0;
     }
+
+
 
     public String getVolNid() {
         return volNid;

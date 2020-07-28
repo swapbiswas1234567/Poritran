@@ -65,6 +65,17 @@ public class AddRequest extends AppCompatActivity {
         init();
         setLimits();
 
+        /*ADDING LISTENER TO UPLOAD(up) BUTTON STARTS*/
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(AddRequest.this,SubmitPhoto.class);
+                startActivity(intent);
+            }
+        });
+        /*ADDING LISTENER TO UPLOAD(up) BUTTON ENDS*/
+
+
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

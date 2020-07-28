@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox rememberMeCheckBox;
     Button testButton;
     ProgressBar progressBar;
-
-
+   
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

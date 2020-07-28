@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:padding="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:background="#514949"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView1SP"
+            android:layout_margin="2dp"
+
+            />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:layout_margin="1dp"
+                android:background="#514949"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/imageView2SP"
+                />
+            <Button
+                android:text="Select PIcture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/selectPictureButtonSP"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rotate picture"
+                android:id="@+id/rotatePictureSP"
+                />
+            <Button
+                android:text="Upload PIcture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uploadPictureButtonSP"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doneeNameTextViewSP"
+        android:textSize="20sp"
+        android:text="donee name"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/familyMembersTextViewSP"
+        android:textSize="20sp"
+        android:text="family Members"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/presentAddressTextViewSP"
+        android:textSize="20sp"
+        android:text="Present Address"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneNoTextViewSP"
+        android:textSize="20sp"
+        android:text="0121"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/amountTextViewSP"
+        android:textSize="20sp"
+        android:text="Amount"
+        />
+
+    <TextView
+        android:background="#D6D6D3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/donatedByNameTextViewSP"
+        android:textSize="20dp"
+        android:text="Donate BY NAME"
+        />
+    <TextView
+        android:background="#D6D6D3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/donatedByNidTextViewSP"
+        android:textSize="20dp"
+        android:text="Donate BY NID"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#D6D6D3"
+        />
+</LinearLayout>
