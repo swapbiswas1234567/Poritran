@@ -19,11 +19,11 @@
                 android:layout_height="179dp"
                 android:layout_marginRight="2dp" />
             <TextView
+                android:id="@+id/amountWAL"
                 android:layout_marginTop="2dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/amountTextView"
                 android:text="2000"
                 android:textSize="23dp"
                 android:textColor="#000000"
@@ -70,30 +70,27 @@
                 android:fontFamily="serif"
                 />
             <TextView
-
+                android:id="@+id/phoneWAL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/phoneNoTextView"
                 android:text="01712299121"
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="serif"
                 />
             <TextView
-
+                android:id="@+id/addressWAL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/presentAddressTextView"
                 android:text="Building-10,Road-2,Mirpur DOHS,Dhaka"
                 android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="serif"
                 />
             <TextView
-
+                android:id="@+id/commentWAL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/commentTextView"
                 android:text="Needy"
                 android:textSize="18dp"
                 android:textColor="#000000"
@@ -132,13 +129,13 @@
 
 
         <Button
+            android:id="@+id/removeWAL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Donate"
-            android:id="@+id/donateButton"
+            android:text="REMOVE REQUEST"
             android:layout_gravity="center"
-            android:background="#4CAF50"
+            android:background="#F44336"
             android:layout_marginBottom="5dp"
             android:textColor="#fff"
             android:fontFamily="serif"

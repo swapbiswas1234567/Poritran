@@ -11,18 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity2"></activity>
-        <activity android:name=".password_change"></activity>
-        <activity android:name=".password_reset"></activity>
-        <activity android:name=".forgot_pass"></activity>
-        <activity android:name=".forgot_pass_confirm"></activity>
-        <activity android:name=".recovery_code"></activity>
-        <activity android:name=".sign_up"></activity>
-
-        <activity android:name=".DonorActivity"></activity>
-        <activity android:name=".DonationManagementActivity"></activity>
-
-
+        <activity android:name=".SubmitPhoto"></activity>
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".password_change" />
+        <activity android:name=".password_reset" />
+        <activity android:name=".forgot_pass" />
+        <activity android:name=".forgot_pass_confirm" />
+        <activity android:name=".recovery_code" />
+        <activity android:name=".sign_up" />
+        <activity android:name=".DonorActivity" />
+        <activity android:name=".DonationManagementActivity" />
         <activity android:name=".WaitingForApproval" />
         <activity
             android:name=".AddRequest"

@@ -95,21 +95,21 @@ public class AddRequest extends AppCompatActivity {
             }
         });
 
-        pending.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
-                startActivity(intent);
-                customType(AddRequest.this, "left-to-right");
-            }
-        });
-
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddRequest.this, DonorActivity.class);
                 startActivity(intent);
                 customType(AddRequest.this, "right-to-left");
+            }
+        });
+
+        pending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
+                startActivity(intent);
+                customType(AddRequest.this, "left-to-right");
             }
         });
 
