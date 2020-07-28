@@ -106,7 +106,7 @@ public class CustomAdapter extends BaseAdapter {
                     context.startActivity(intent);*/
 
                     AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(context);
-                    alertDialogBuilder.setMessage("Are you sure you want to donate Tk"+amount+"?");
+                    alertDialogBuilder.setMessage("Are you sure you want to donate Tk "+amount+"?");
                     alertDialogBuilder.setPositiveButton(
                             "Yes",
                             new DialogInterface.OnClickListener() {
@@ -116,8 +116,8 @@ public class CustomAdapter extends BaseAdapter {
                                             ("Request/"+volunteerName+"/"+key);
 
 
-                                    myReference.child("donatedByName").setValue(userName);
-                                    myReference.child("donatedByNid").setValue(userNid);
+                                    myReference.child("donatedByName").setValue(FunctionVariable.NID);
+                                    myReference.child("donatedByNid").setValue(FunctionVariable.NID);
                                     myReference.child("status").setValue(1);
 
                                     Intent intent=new Intent(context,context.getClass());

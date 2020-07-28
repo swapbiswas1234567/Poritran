@@ -167,6 +167,7 @@ public class DonorActivity extends AppCompatActivity {
                         // Log.d("TAG1","debug0: "+dataSnapshot.getKey());
                         for (DataSnapshot ds1 : dataSnapshot.getChildren()){
                             for(DataSnapshot ds2:ds1.getChildren()){
+                                String donorNid = ds2.child("donatedByNid").getValue().toString();
                                 //Log.d("TAG1",ds2.getKey());
                                 //Log.d("TAG1",ds2.child("amount").getValue().toString());
                                 String volunteerName=ds1.getKey();
@@ -179,7 +180,7 @@ public class DonorActivity extends AppCompatActivity {
                                 String status=ds2.child("status").getValue().toString();
                                 String reqUri=ds2.child("reqUri").getValue().toString();
 
-                                if(status.equals("1") || status.equals("2")){
+                                if(status.equals("1") && donorNid.equals(FunctionVariable.NID)){
                                     volunteerArrayList.add(volunteerName);
                                     keyArrayList.add(ds2.getKey());
                                     amountArrayList.add(amount);
