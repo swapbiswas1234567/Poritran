@@ -56,6 +56,22 @@ public class AddRequest extends AppCompatActivity {
 
     private ArrayList<String> allPendingnid;
 
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(AddRequest.this);
+        alertDialogBuilder.setMessage("Are you sure want to exit?");
+        alertDialogBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +147,73 @@ public class AddRequest extends AppCompatActivity {
                 customType(AddRequest.this, "left-to-right");
             }
         });
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, SubmitPhoto.class);
+                startActivity(intent);
+                customType(AddRequest.this, "left-to-right");
+            }
+        });
+
+        my.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, MyWork.class);
+                startActivity(intent);
+                customType(AddRequest.this, "left-to-right");
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(AddRequest.this);
+                alertDialogBuilder.setMessage("Are you sure want to logout?");
+                alertDialogBuilder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveTaskToBack(true);
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
+    }
+
+    private void init(){
+        nid = findViewById(R.id.nidEdt);
+        name = findViewById(R.id.nameEdt);
+        phoneno = findViewById(R.id.phoneEdt);
+        presentaddress = findViewById(R.id.addressEdt);
+        familymember = findViewById(R.id.memberEdt);
+        amount = findViewById(R.id.amountEdt);
+        comment = findViewById(R.id.commentEdt);
+        viewHolder = findViewById(R.id.linearAddReq);
+
+        post = findViewById(R.id.postAddReq);
+        available = findViewById(R.id.availableAddReq);
+        doneePhoto = findViewById(R.id.doneePhotoAddReq);
+        upload = findViewById(R.id.uploadAddReq);
+
+        home = findViewById(R.id.homeAR);
+        pending = findViewById(R.id.pendingAR);
+        approved = findViewById(R.id.approvedAR);
+        my = findViewById(R.id.myAR);
+        logout = findViewById(R.id.logoutAR);
+        up = findViewById(R.id.uploadAR);
+
+        progressDialog = new ProgressDialog(AddRequest.this);
+
+        viewHolder.setVisibility(View.INVISIBLE);
+        available.setText("");
+
+        allPendingnid = new ArrayList<>();
     }
 
     @Override
@@ -287,35 +370,7 @@ public class AddRequest extends AppCompatActivity {
     }
 
 
-    private void init(){
-        nid = findViewById(R.id.nidEdt);
-        name = findViewById(R.id.nameEdt);
-        phoneno = findViewById(R.id.phoneEdt);
-        presentaddress = findViewById(R.id.addressEdt);
-        familymember = findViewById(R.id.memberEdt);
-        amount = findViewById(R.id.amountEdt);
-        comment = findViewById(R.id.commentEdt);
-        viewHolder = findViewById(R.id.linearAddReq);
 
-        post = findViewById(R.id.postAddReq);
-        available = findViewById(R.id.availableAddReq);
-        doneePhoto = findViewById(R.id.doneePhotoAddReq);
-        upload = findViewById(R.id.uploadAddReq);
-
-        home = findViewById(R.id.homeAR);
-        pending = findViewById(R.id.pendingAR);
-        approved = findViewById(R.id.approvedAR);
-        my = findViewById(R.id.myAR);
-        logout = findViewById(R.id.logoutAR);
-        up = findViewById(R.id.uploadAR);
-
-        progressDialog = new ProgressDialog(AddRequest.this);
-
-        viewHolder.setVisibility(View.INVISIBLE);
-        available.setText("");
-
-        allPendingnid = new ArrayList<>();
-    }
 
 
     boolean validation(){

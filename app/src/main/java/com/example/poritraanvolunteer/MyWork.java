@@ -3,6 +3,8 @@ package com.example.poritraanvolunteer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +28,22 @@ public class MyWork extends AppCompatActivity {
     TextView noOfReq, refresh;
     ListView lView;
     ArrayList<Transaction> completedRequests;
+
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(Approved.this);
+        alertDialogBuilder.setMessage("Are you sure want to exit?");
+        alertDialogBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

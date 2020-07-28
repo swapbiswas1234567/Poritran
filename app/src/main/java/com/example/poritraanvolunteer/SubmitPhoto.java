@@ -3,6 +3,8 @@ package com.example.poritraanvolunteer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +35,23 @@ public class SubmitPhoto extends AppCompatActivity {
     ArrayList <Transaction>transationArrayList;
     ArrayList <String> donorNameArrayList;
     ArrayList <String> donorNidArrayList;
+
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(SubmitPhoto.this);
+        alertDialogBuilder.setMessage("Are you sure want to exit?");
+        alertDialogBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,16 +151,27 @@ public class SubmitPhoto extends AppCompatActivity {
         approvedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(SubmitPhoto.this, WaitingForApproval.class);
-                //startActivity(intent);
-                //customType(SubmitPhoto.this, "right-to-left");
+                Intent intent = new Intent(SubmitPhoto.this, Approved.class);
+                startActivity(intent);
+                customType(SubmitPhoto.this, "right-to-left");
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SubmitPhoto.this, AddRequest.class);
+                startActivity(intent);
+                customType(SubmitPhoto.this, "right-to-left");
             }
         });
 
         my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SubmitPhoto.this, MyWork.class);
+                startActivity(intent);
+                customType(SubmitPhoto.this, "left-to-right");
             }
         });
 

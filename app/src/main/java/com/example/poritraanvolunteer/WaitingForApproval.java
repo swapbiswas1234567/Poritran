@@ -3,6 +3,9 @@ package com.example.poritraanvolunteer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +21,32 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static maes.tech.intentanim.CustomIntent.customType;
+
 public class WaitingForApproval extends AppCompatActivity {
 
-    Button home, add, pending, approved, submit, my, logout;
+    Button home, add, approved, up, my, logout;
     TextView noOfReq,refresh;
     ListView lView;
     ArrayList<Transaction> pendingRequests;
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(WaitingForApproval.this);
+        alertDialogBuilder.setMessage("Are you sure want to exit?");
+        alertDialogBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,18 +62,80 @@ public class WaitingForApproval extends AppCompatActivity {
             }
         });
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WaitingForApproval.this, DonorActivity.class);
+                startActivity(intent);
+                customType(WaitingForApproval.this, "right-to-left");
+            }
+        });
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WaitingForApproval.this, AddRequest.class);
+                startActivity(intent);
+                customType(WaitingForApproval.this, "right-to-left");
+            }
+        });
+
+        approved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WaitingForApproval.this, Approved.class);
+                startActivity(intent);
+                customType(WaitingForApproval.this, "left-to-right");
+            }
+        });
+
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WaitingForApproval.this, SubmitPhoto.class);
+                startActivity(intent);
+                customType(WaitingForApproval.this, "left-to-right");
+            }
+        });
+
+        my.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WaitingForApproval.this, MyWork.class);
+                startActivity(intent);
+                customType(WaitingForApproval.this, "left-to-right");
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(WaitingForApproval.this);
+                alertDialogBuilder.setMessage("Are you sure want to logout?");
+                alertDialogBuilder.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                moveTaskToBack(true);
+                                android.os.Process.killProcess(android.os.Process.myPid());
+                                System.exit(1);
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     void init(){
         home = findViewById(R.id.homeWA);
         add = findViewById(R.id.addWA);
-        pending = findViewById(R.id.pendingWA);
         approved = findViewById(R.id.approvedWA);
         my = findViewById(R.id.myWA);
         logout = findViewById(R.id.logoutWA);
         noOfReq = findViewById(R.id.noOfreqWA);
         lView = findViewById(R.id.lViewWA);
+        up = findViewById(R.id.uploadWA);
         refresh = findViewById(R.id.refreshWA);
 
         pendingRequests = new ArrayList<>();
