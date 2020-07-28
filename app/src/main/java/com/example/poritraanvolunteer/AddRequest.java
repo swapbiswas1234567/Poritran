@@ -16,6 +16,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,17 +25,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class AddRequest extends AppCompatActivity {
 
-    TextView post;
+    TextView post,available;
     ImageView doneePhoto;
     Button upload;
 
@@ -44,8 +50,11 @@ public class AddRequest extends AppCompatActivity {
     private DatabaseReference mDataBaseRef;
     private ProgressDialog progressDialog;
     private EditText nid, name, phoneno, presentaddress,familymember, amount, comment;
+    private LinearLayout viewHolder;
 
-    long MAX_REQ_COUNT, MAX_REQ_AMOUNT;
+    long MAX_REQ_COUNT, MAX_REQ_AMOUNT, PENDING_COUNT=0;
+
+    private ArrayList<String> allPendingnid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,16 @@ public class AddRequest extends AppCompatActivity {
             public void onClick(View v) {
                 if(!FunctionVariable.isConnected(AddRequest.this)){
                     toast("You must be connected with internet");
+                    return;
+                }
+                String s = available.getText().toString().trim();
+                if(s.equals("")){
+                    toast("Loading! Please Wait...");
+                    return;
+                }
+                int availableReq = Integer.parseInt(s);
+                if(availableReq==0){
+                    toast("You have posted maximum number of request");
                     return;
                 }
                 if(validation()){
@@ -111,15 +130,30 @@ public class AddRequest extends AppCompatActivity {
             final String COMMENT = comment.getText().toString().trim();
             final String key = mDataBaseRef.push().getKey();
 
-            StorageReference fileReference = mStorageRef.child(key + "." + getFileExtension(mImageUri));
+            final StorageReference fileReference = mStorageRef.child(key + "." + getFileExtension(mImageUri));
             fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                /*public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     String reqUri = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                     Transaction t = new Transaction(VOL_NID,reqUri,NID,NAME,PHONENO,ADDRESS,MEMBER,AMOUNT,COMMENT,key);
                     mDataBaseRef.child(key).setValue(t);
+                    PENDING_COUNT++;
+                    setTotalPendingRequest();
                     progressDialog.dismiss();
                     toast("Your request has been posted for Admin's approval");
+                }*/
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String reqUri = uri.toString();
+                            //Log.d("TAG2","reqUri="+reqUri);
+                            Transaction t = new Transaction(VOL_NID,reqUri,NID,NAME,PHONENO,ADDRESS,MEMBER,AMOUNT,COMMENT,key);
+                            mDataBaseRef.child(key).setValue(t);
+                            progressDialog.dismiss();
+                            toast("Your request has been posted for donation");
+                        }
+                    });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -140,8 +174,67 @@ public class AddRequest extends AppCompatActivity {
     }
 
     private void setLimits(){
-        MAX_REQ_AMOUNT = 10000;
-        MAX_REQ_COUNT = 5;
+        DatabaseReference dAmount = FirebaseDatabase.getInstance().getReference("Limits/maxamount");
+        final DatabaseReference dReq = FirebaseDatabase.getInstance().getReference("Limits/requestcount");
+        dAmount.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                MAX_REQ_AMOUNT = dataSnapshot.getValue(Integer.class);
+                dReq.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        MAX_REQ_COUNT = dataSnapshot.getValue(Integer.class);
+                        setTotalPendingRequest();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //MAX_REQ_AMOUNT = 10000;
+        ///MAX_REQ_COUNT = 5;
+    }
+
+    void setTotalAvailableRequest(){
+
+        toast(FunctionVariable.NID);
+        available.setText((MAX_REQ_COUNT - PENDING_COUNT) + "");
+        if(MAX_REQ_COUNT - PENDING_COUNT != 0){
+            viewHolder.setVisibility(View.VISIBLE);
+        }
+    }
+
+    void setTotalPendingRequest(){
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("Request/" + FunctionVariable.NID);
+        PENDING_COUNT = 0;
+        d.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()){
+                    Transaction t = i.getValue(Transaction.class);
+                    if(t.getStatus()==0){
+                        PENDING_COUNT++;
+                        allPendingnid.add(t.getNid());
+                        ///Toast.makeText(getApplicationContext(), PENDING_COUNT + " " + MAX_REQ_COUNT + " " + MAX_REQ_AMOUNT, Toast.LENGTH_SHORT).show();
+                    }
+                }
+                setTotalAvailableRequest();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void toast(String message){
@@ -163,12 +256,19 @@ public class AddRequest extends AppCompatActivity {
         familymember = findViewById(R.id.memberEdt);
         amount = findViewById(R.id.amountEdt);
         comment = findViewById(R.id.commentEdt);
+        viewHolder = findViewById(R.id.linearAddReq);
 
         post = findViewById(R.id.postAddReq);
+        available = findViewById(R.id.availableAddReq);
         doneePhoto = findViewById(R.id.doneePhotoAddReq);
         upload = findViewById(R.id.uploadAddReq);
 
         progressDialog = new ProgressDialog(AddRequest.this);
+
+        viewHolder.setVisibility(View.INVISIBLE);
+        available.setText("");
+
+        allPendingnid = new ArrayList<>();
     }
 
 
@@ -191,6 +291,14 @@ public class AddRequest extends AppCompatActivity {
         if(NID.equals("")){
             nid.setError("Requestor's NID Number Must Be Filled Up!");
             return false;
+        }
+
+        int len = allPendingnid.size();
+        for(int i=0; i<len; i++){
+            if(allPendingnid.get(i).equals(NID)){
+                nid.setError("This NID has already a pending request by you");
+                return false;
+            }
         }
 
         if(NAME.equals("")){
