@@ -19,6 +19,10 @@
         <activity android:name=".recovery_code"></activity>
         <activity android:name=".sign_up"></activity>
 
+        <activity android:name=".DonorActivity"></activity>
+        <activity android:name=".DonationManagementActivity"></activity>
+
+
         <activity android:name=".WaitingForApproval" />
         <activity
             android:name=".AddRequest"
