@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="10dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:background="@drawable/default_pro_pic"
+                android:id="@+id/doneeImageView"
+                android:layout_width="182dp"
+                android:layout_height="179dp"
+                android:layout_marginRight="2dp" />
+            <TextView
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amountTextView"
+                android:text="2000"
+                android:textSize="23dp"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:text="Md Shadman Aadeeb"
+                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                android:layout_marginBottom="3dp"/>
+
+            <TextView
+                android:background="#FFFFFF"
+                android:id="@+id/volunteerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Volunteer"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/familyMembersTextView"
+                android:text="4 family members"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneNoTextView"
+                android:text="01712299121"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/presentAddressTextView"
+                android:text="Building-10,Road-2,Mirpur DOHS,Dhaka"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/commentTextView"
+                android:text="Needy"
+                android:textSize="18dp"
+                android:textColor="#000000"
+                android:fontFamily="serif"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:visibility="gone"
+        android:background="#7885CD"
+        android:id="@+id/requestIdTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="key"
+        android:textColor="#000000"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Donate"
+            android:id="@+id/donateButton"
+            android:layout_gravity="center"
+            android:background="#4CAF50"
+            android:layout_marginBottom="5dp"
+            android:textColor="#fff"
+            android:fontFamily="serif"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
