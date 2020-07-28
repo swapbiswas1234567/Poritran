@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,19 +32,7 @@ public class Approved extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(Approved.this);
-        alertDialogBuilder.setMessage("Are you sure want to exit?");
-        alertDialogBuilder.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        moveTaskToBack(true);
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(1);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -100,7 +89,7 @@ public class Approved extends AppCompatActivity {
         my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Approved.this, SubmitPhoto.class);
+                Intent intent = new Intent(Approved.this, MyWork.class);
                 startActivity(intent);
                 customType(Approved.this, "left-to-right");
             }
@@ -115,9 +104,8 @@ public class Approved extends AppCompatActivity {
                         "Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                moveTaskToBack(true);
-                                android.os.Process.killProcess(android.os.Process.myPid());
-                                System.exit(1);
+                                Intent intent = new Intent(Approved.this, MainActivity.class);
+                                startActivity(intent);
                             }
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();

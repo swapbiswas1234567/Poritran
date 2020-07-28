@@ -57,19 +57,7 @@ public class AddRequest extends AppCompatActivity {
     private ArrayList<String> allPendingnid;
 
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(AddRequest.this);
-        alertDialogBuilder.setMessage("Are you sure want to exit?");
-        alertDialogBuilder.setPositiveButton(
-                "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        moveTaskToBack(true);
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        System.exit(1);
-                    }
-                });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+        Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -175,9 +163,8 @@ public class AddRequest extends AppCompatActivity {
                         "Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                moveTaskToBack(true);
-                                android.os.Process.killProcess(android.os.Process.myPid());
-                                System.exit(1);
+                                Intent intent = new Intent(AddRequest.this, MainActivity.class);
+                                startActivity(intent);
                             }
                         });
                 AlertDialog alertDialog = alertDialogBuilder.create();
