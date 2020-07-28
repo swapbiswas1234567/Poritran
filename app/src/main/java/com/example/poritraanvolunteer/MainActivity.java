@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+        //Intent intent = new Intent(MainActivity.this, AddRequest.class);
+        //startActivity(intent);
         progressBar=findViewById(R.id.progressBar);
         //rememberMeCheckBox=findViewById(R.id.rememberMeCheckBox);
         id=findViewById(R.id.id);

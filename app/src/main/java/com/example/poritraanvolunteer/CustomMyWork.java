@@ -3,8 +3,6 @@ package com.example.poritraanvolunteer;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +10,28 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CustomWaitingApproval extends BaseAdapter {
+public class CustomMyWork extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     List<Transaction> tempList;
     ArrayList<Transaction> mainList;
     TextView noOfReq;
 
-    public CustomWaitingApproval(Context context, List<Transaction> tempList, TextView t) {
+    public CustomMyWork(Context context, List<Transaction> tempList, TextView t){
         this.context = context;
         this.tempList = tempList;
         inflater = LayoutInflater.from(context);
@@ -58,22 +60,28 @@ public class CustomWaitingApproval extends BaseAdapter {
         final int i = position;
         if(view==null){
             inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view=inflater.inflate(R.layout.admin_approval_listview,parent,false);
+            view=inflater.inflate(R.layout.mywork_listview,parent,false);
         }
 
-        final TextView nameTxt = view.findViewById(R.id.nameWA);
-        final TextView phoneTxt = view.findViewById(R.id.phoneWA);
-        final TextView idTxt = view.findViewById(R.id.idWA);
-        final TextView nidTxt = view.findViewById(R.id.nidWA);
-        final TextView addressTxt = view.findViewById(R.id.addressWA);
-        final TextView memberTxt = view.findViewById(R.id.memberWA);
-        final TextView amountTxt = view.findViewById(R.id.amountWA);
-        final TextView commentTxt = view.findViewById(R.id.commentWA);
-        final Button cancelBtn = view.findViewById(R.id.cancelWA);
-        final ImageView photoImg = view.findViewById(R.id.photoWA);
+        final TextView nameTxt = view.findViewById(R.id.nameAL);
+        final TextView phoneTxt = view.findViewById(R.id.phoneAL);
+        final TextView idTxt = view.findViewById(R.id.idAL);
+        final TextView nidTxt = view.findViewById(R.id.nidAL);
+        final TextView addressTxt = view.findViewById(R.id.addressAL);
+        final TextView memberTxt = view.findViewById(R.id.memberAL);
+        final TextView amountTxt = view.findViewById(R.id.amountAL);
+        final TextView commentTxt = view.findViewById(R.id.commentAL);
+        //final Button cancelBtn = view.findViewById(R.id.cancelAL);
+        final ImageView photoImg = view.findViewById(R.id.photoAL);
+        final TextView donorNameTxt = view.findViewById(R.id.donorNameAL);
+        final TextView donorAddTxt = view.findViewById(R.id.donorAddressAL);
+        final TextView donorPhoneTxt = view.findViewById(R.id.donorContactAL);
+        final TextView donorEmailTxt = view.findViewById(R.id.donorEmailAL);
 
         Transaction t = tempList.get(i);
+        final Transaction tCopy = t;
         final String reqId = t.getReqId();
+        final String donorNid = t.getDonatedByNid();
 
         noOfReq.setText(tempList.size() + "");
         nameTxt.setText(t.getName());
@@ -84,27 +92,23 @@ public class CustomWaitingApproval extends BaseAdapter {
         memberTxt.setText(t.getFamilyMember() + "");
         amountTxt.setText(t.getAmount() + "");
         commentTxt.setText(t.getComment());
-        String link=t.getReqUri();
+        donorNameTxt.setText(t.getDonatedByName());
+        String link=t.getConfirmationUri();
         Picasso.with(context).load(link).fit().into(photoImg);
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("user/"+donorNid);
+        d.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(context);
-                alertDialogBuilder.setMessage("Are you sure you want to remove this request?");
-                alertDialogBuilder.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                tempList.remove(i);
-                                notifyDataSetChanged();
-                                noOfReq.setText(tempList.size() + "");
-                                DatabaseReference d = FirebaseDatabase.getInstance().getReference("Request/"+FunctionVariable.NID+"/"+reqId);
-                                d.removeValue();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user u = dataSnapshot.getValue(user.class);
+                donorAddTxt.setText(u.getAddress());
+                donorPhoneTxt.setText(u.getContact());
+                donorEmailTxt.setText(u.getMail());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 

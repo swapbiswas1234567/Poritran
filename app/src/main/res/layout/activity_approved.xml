@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Pending "
+                android:text="Pick Up Donation "
                 android:fontFamily="serif"
                 android:textSize="17sp"
                 android:textColor="#000"
@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"/>
 
             <TextView
-                android:id="@+id/noOfreqWA"
+                android:id="@+id/noOfreqA"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
@@ -48,7 +48,7 @@
 
 
         <TextView
-            android:id="@+id/refreshWA"
+            android:id="@+id/refreshA"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -72,7 +72,7 @@
         android:background="@color/background">
 
         <ListView
-            android:id="@+id/lViewWA"
+            android:id="@+id/lViewA"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="16"
@@ -91,7 +91,7 @@
             android:weightSum="10">
 
             <Button
-                android:id="@+id/homeWA"
+                android:id="@+id/homeA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -107,7 +107,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
-                android:id="@+id/addWA"
+                android:id="@+id/addA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -124,7 +124,7 @@
 
 
             <Button
-                android:id="@+id/pendingWA"
+                android:id="@+id/pendingA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -132,7 +132,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/pendingred"/>
+                android:background="@drawable/pendingblack"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -140,7 +140,6 @@
                 android:layout_weight="0.5"/>
 
             <Button
-                android:id="@+id/approvedWA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -148,7 +147,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/publishedblack"/>
+                android:background="@drawable/publishedred"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -156,7 +155,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
-                android:id="@+id/uploadWA"
+                android:id="@+id/uploadA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -172,7 +171,7 @@
                 android:layout_weight="0.5"/>
 
             <Button
-                android:id="@+id/myWA"
+                android:id="@+id/myA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -189,7 +188,7 @@
 
 
             <Button
-                android:id="@+id/logoutWA"
+                android:id="@+id/logoutA"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

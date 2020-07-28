@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,6 +123,14 @@ public class AddRequest extends AppCompatActivity {
             }
         });
 
+        approved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddRequest.this, Approved.class);
+                startActivity(intent);
+                customType(AddRequest.this, "left-to-right");
+            }
+        });
     }
 
     @Override
