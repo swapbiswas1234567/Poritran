@@ -30,7 +30,7 @@ public class MyWork extends AppCompatActivity {
     ArrayList<Transaction> completedRequests;
 
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(Approved.this);
+        AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(MyWork.this);
         alertDialogBuilder.setMessage("Are you sure want to exit?");
         alertDialogBuilder.setPositiveButton(
                 "Yes",
