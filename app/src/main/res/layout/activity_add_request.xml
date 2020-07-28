@@ -64,7 +64,8 @@
             android:gravity="center_vertical"
             android:textColor="#000"
             android:textSize="15sp"
-            android:layout_marginRight="25dp"/>
+            android:layout_marginRight="25dp"
+            tools:ignore="RtlCompat" />
 
     </LinearLayout>
 
@@ -114,6 +115,15 @@
 
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/rotateButtonAddReq"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Rotate Image"
+                    android:textColor="#fff"
+                    android:fontFamily="serif"
+                    android:background="#3E4EA2"/>
 
                 <Button
                     android:id="@+id/uploadAddReq"

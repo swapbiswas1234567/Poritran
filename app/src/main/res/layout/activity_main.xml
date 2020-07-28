@@ -95,12 +95,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="60dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/debugButton"
-        android:text="Button"
-        />
+
 
 
 

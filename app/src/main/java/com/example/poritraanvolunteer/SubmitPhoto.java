@@ -47,8 +47,9 @@ public class SubmitPhoto extends AppCompatActivity {
         init();
         setListenerToButtons();
         this.setListenerToRefreshTextVIew();
-
+        this.refreshTextView.callOnClick();
     }
+
 
     private  void setListenerToRefreshTextVIew(){
         refreshTextView.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +105,7 @@ public class SubmitPhoto extends AppCompatActivity {
                         }
                         customAdapter=new CustomAdapter2(SubmitPhoto.this,transationArrayList,donorNameArrayList,donorNidArrayList);
                         listView.setAdapter(customAdapter);
+                        noOfReq.setText(customAdapter.getCount()+"");
                     }
 
                     @Override

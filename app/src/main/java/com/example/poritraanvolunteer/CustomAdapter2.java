@@ -45,6 +45,9 @@ public class CustomAdapter2 extends BaseAdapter {
 
     public int currentPosition;
     public ImageView currentImageView;
+    public Button currentRotateButton;
+    public Button currentUploadButton;
+
     Context context;
     LayoutInflater layoutInflater;
     ArrayList <Transaction> transactionArrayList;
@@ -107,9 +110,10 @@ public class CustomAdapter2 extends BaseAdapter {
         final String volunteerNid=transactionArrayList.get(position).volNid;
 
         Button selectPictureButton=templateView.findViewById(R.id.selectPictureButtonSP);
-        Button uploadPictureButton=templateView.findViewById(R.id.uploadPictureButtonSP);
-        Button rotatePictureButton=templateView.findViewById(R.id.rotatePictureSP);
-
+        final Button uploadPictureButton=templateView.findViewById(R.id.uploadPictureButtonSP);
+        final Button rotatePictureButton=templateView.findViewById(R.id.rotatePictureSP);
+        uploadPictureButton.setEnabled(false);
+        rotatePictureButton.setEnabled(false);
         selectPictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,7 +125,8 @@ public class CustomAdapter2 extends BaseAdapter {
                 currentImageView=imageView2;
                 currentPosition=position;
                 ((Activity)context).startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-
+                currentRotateButton=rotatePictureButton;
+                currentUploadButton=uploadPictureButton;
 
 
                 /*REST OF THE CODES FOR PLACING GALLERY  IMAGE ON IMAGEVIEW  IS IN onActivityResult() FUNCTION*/
@@ -255,7 +260,8 @@ public class CustomAdapter2 extends BaseAdapter {
                         selectedImage, 200, 200, false);//RESIZED TO 200 by 200
                 /*Place the image on imageview*/
                 currentImageView.setImageBitmap(resizedBitmap);
-
+                currentUploadButton.setEnabled(true);
+                currentRotateButton.setEnabled(true);
                 /*uploadImageButton.setEnabled(true);
                 rotateImageButton.setEnabled(true);*/
             } catch (FileNotFoundException e) {
