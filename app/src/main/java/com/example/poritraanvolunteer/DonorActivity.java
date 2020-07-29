@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -114,19 +115,35 @@ public class DonorActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(DonorActivity.this);
-                alertDialogBuilder.setMessage("Are you sure want to logout?");
-                alertDialogBuilder.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                FunctionVariable.NID = "NULL";
-                                Intent intent = new Intent(DonorActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                String remeber;
+                SharedPreferences sharedPreferences=getSharedPreferences("rememberFile",MODE_PRIVATE);
+
+                remeber =sharedPreferences.getString("nid_login","123");
+                if (remeber.equals("NULL"))
+                {
+                    FunctionVariable.NID = "NULL";
+                    Intent intent = new Intent(DonorActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog.Builder alertDialogBuilder =new AlertDialog.Builder(DonorActivity.this);
+                    alertDialogBuilder.setMessage("Are you sure want to logout?");
+                    alertDialogBuilder.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    FunctionVariable.NID = "NULL";
+                                    Intent intent = new Intent(DonorActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+
+
+
             }
         });
     }

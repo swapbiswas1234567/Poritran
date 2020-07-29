@@ -43,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
-
         //Intent intent = new Intent(MainActivity.this, AddRequest.class);
         //startActivity(intent);
         progressBar=findViewById(R.id.progressBar);
@@ -65,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
         remeber =sharedPreferences.getString("nid_login","123");
         if (remeber.equals("123"))
+        {
+
+        }
+        else if(remeber.equals("NULL"))
         {
 
         }
@@ -98,9 +97,19 @@ public class MainActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences sharedPreferences3=getSharedPreferences("rememberFile",MODE_PRIVATE);
+                SharedPreferences.Editor editor2=sharedPreferences3.edit();
+                editor2.putString("nid_login","NULL");
+
+
+                editor2.apply();
+
                 FunctionVariable.NID="NULL";
                 Intent intent=new Intent(MainActivity.this,DonorActivity.class);
                 startActivity(intent);
+
+
 
 
             }
@@ -139,55 +148,7 @@ public class MainActivity extends AppCompatActivity {
                                 user u1=snapshot.child(strNew).getValue(user.class);
                                 if (u1.password.equals(password_s))
                                 {
-//                                    if (u1.request_status.equals("approved"))
                                     {
-                                        // Toast.makeText(getApplicationContext(),"Clicking!", Toast.LENGTH_LONG).show();
-//
-//                                        SharedPreferences sharedPreferences3=getSharedPreferences("rememberFile",MODE_PRIVATE);
-//                                        SharedPreferences.Editor editor2=sharedPreferences3.edit();
-//                                        editor2.putString("name",u1.name);
-//                                        editor2.putString("mail",u1.mail);
-//                                        editor2.putString("address",u1.address);
-//                                        editor2.putString("dob",u1.dob);
-//                                        editor2.putString("contact",u1.contact);
-//                                        editor2.putString("role",u1.role);
-//                                        editor2.putString("password",u1.password);
-//                                        editor2.putString("key",strNew);
-//                                        //editor.putString("address",u1.address);
-//
-//                                        editor2.apply();
-//
-
-////                                        if (u1.role.equals("Admin"))
-//                                        {
-//                                            Toast.makeText(getApplicationContext(),"You are logged in as an Admin", Toast.LENGTH_LONG).show();
-//
-//                                        }
-//                                        else if(u1.role.equals("Staff"))
-//                                        {
-//                                            Toast.makeText(getApplicationContext(),"You are logged in as s Staff", Toast.LENGTH_LONG).show();
-//                                        }
-//                                        else if(u1.role.equals("Doctor"))
-//                                        {
-//                                            Toast.makeText(getApplicationContext(),"You are logged in as a Doctor", Toast.LENGTH_LONG).show();
-//                                        }
-//                                        //This is the part where login is completed and the activity is about to be changed
-//                                        //here i am telling the app to store the remember me value
-//                                        if(rememberMeCheckBox.isChecked()){
-//                                            SharedPreferences sharedPreferences1=getSharedPreferences("rememberFile",MODE_PRIVATE);
-//                                            SharedPreferences.Editor editor=sharedPreferences1.edit();
-//                                            editor.putString("remember","true"+u1.role);
-//                                            editor.apply();
-//                                            // Toast.makeText(MainActivity.this,"Checked the checkbox",Toast.LENGTH_SHORT).show();
-//                                        }else{
-//                                            SharedPreferences sharedPreferences1=getSharedPreferences("rememberFile",MODE_PRIVATE);
-//                                            SharedPreferences.Editor editor=sharedPreferences1.edit();
-//                                            editor.putString("remember","false");
-//                                            editor.apply();
-//                                            // Toast.makeText(MainActivity.this,"DID not Check the checkbox",Toast.LENGTH_SHORT).show();
-//                                        }
-
-
                                         //The remember me checkbox code has been dealt with
                                         FunctionVariable.NID=strNew;
                                         Intent intent=new Intent(MainActivity.this,AddRequest.class);
@@ -205,11 +166,7 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         //
                                     }
-                                    //else
-//                                    {
-//                                        progressBar.setVisibility(View.GONE);
-//                                        Toast.makeText(getApplicationContext(),"Your account is not yet verified by admin!", Toast.LENGTH_LONG).show();
-//                                    }
+
 
                                 }
                                 else {
@@ -238,35 +195,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //This WAS just the other way around kept for the purpose of fast testing
-
-
-
 
     }
-
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
-//        // If you don't have res/menu, just create a directory named "menu" inside res
-//        getMenuInflater().inflate(R.menu.home_button, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    // handle button activities
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.mybutton) {
-//            Intent intent=new Intent(getApplicationContext(),DonorActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(intent);
-//            // do something here
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 
     @Override
