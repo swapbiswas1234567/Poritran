@@ -39,6 +39,11 @@ public class DonorActivity extends AppCompatActivity {
     ArrayList<Transaction> allRequests;
 
     public void onBackPressed() {
+        if(FunctionVariable.NID.equals("NULL")){
+            Intent intent = new Intent(DonorActivity.this, MainActivity.class);
+            startActivity(intent);
+            return;
+        }
         Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 

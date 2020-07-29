@@ -73,7 +73,6 @@ public class AddRequest extends AppCompatActivity {
                     return;
                 }
                 if(validation()){
-                    Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
                     postRequest();
                 }
             }
