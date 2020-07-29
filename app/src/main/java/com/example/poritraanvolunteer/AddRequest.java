@@ -9,8 +9,12 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -33,6 +37,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static maes.tech.intentanim.CustomIntent.customType;
@@ -41,7 +48,7 @@ public class AddRequest extends AppCompatActivity {
 
     TextView post,available;
     ImageView doneePhoto;
-    Button upload;
+    Button upload,rotateButton;
     Button home, up, pending, approved, my, logout;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -208,8 +215,30 @@ public class AddRequest extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!= null && data.getData()!= null){
-            mImageUri = data.getData();
-            Picasso.with(this).load(mImageUri).into(doneePhoto);
+            //mImageUri = data.getData();
+            //Picasso.with(this).load(mImageUri).into(doneePhoto);
+            try {
+                /*Get the Uniform Resource Identifier of the image*/
+                final Uri imageUri = data.getData();
+                /*Create an input stream from the image uri*/
+                final InputStream imageStream = AddRequest.this.getContentResolver().openInputStream(imageUri);
+                /*Get the data from the input stream into the butmap*/
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                /*Resize the image and place it on another bitmap*/
+                Bitmap resizedBitmap = Bitmap.createScaledBitmap(
+                        selectedImage, 200, 200, false);//RESIZED TO 200 by 200
+                /*Place the image on imageview*/
+                doneePhoto.setImageBitmap(resizedBitmap);
+                Log.d("TAG1","Set Image in bitmap");
+                /*currentUploadButton.setEnabled(true);
+                currentRotateButton.setEnabled(true);*/
+                /*uploadImageButton.setEnabled(true);
+                rotateImageButton.setEnabled(true);*/
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(AddRequest.this, "Something went wrong", Toast.LENGTH_LONG).show();
+            }
+
         }
 
         else{
@@ -226,7 +255,7 @@ public class AddRequest extends AppCompatActivity {
     }
 
     private void uploadRequest(){
-        if(mImageUri!=null){
+        if(true){//CHANGED
             final String VOL_NID = FunctionVariable.NID;
             final String NID = nid.getText().toString().trim();
             final String NAME = name.getText().toString().trim();
@@ -237,18 +266,19 @@ public class AddRequest extends AppCompatActivity {
             final String COMMENT = comment.getText().toString().trim();
             final String key = mDataBaseRef.push().getKey();
 
-            final StorageReference fileReference = mStorageRef.child(key + "." + getFileExtension(mImageUri));
-            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            /*Converting the Image from image view into a byte array*/
+            doneePhoto.setDrawingCacheEnabled(true);
+            doneePhoto.buildDrawingCache();
+            Bitmap bitmap = ((BitmapDrawable) doneePhoto.getDrawable()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 65, baos);
+            byte[] data = baos.toByteArray();
+
+            final StorageReference fileReference = mStorageRef.child(key + ".jpg" );
+            Log.d("TAGA","About to put data inside");
+            fileReference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                /*public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String reqUri = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                    Transaction t = new Transaction(VOL_NID,reqUri,NID,NAME,PHONENO,ADDRESS,MEMBER,AMOUNT,COMMENT,key);
-                    mDataBaseRef.child(key).setValue(t);
-                    PENDING_COUNT++;
-                    setTotalPendingRequest();
-                    progressDialog.dismiss();
-                    toast("Your request has been posted for Admin's approval");
-                }*/
+
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
@@ -371,10 +401,10 @@ public class AddRequest extends AppCompatActivity {
         int max = Integer.MAX_VALUE;
         long MAX = (long)max;
 
-        if(mImageUri==null){
+        /*if(mImageUri==null){
             toast("You Must Upload A Photo Of The Requester");
             return false;
-        }
+        }*/
 
         if(NID.equals("")){
             nid.setError("Requestor's NID Number Must Be Filled Up!");
