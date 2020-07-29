@@ -31,7 +31,7 @@ public class MyWork extends AppCompatActivity {
     ArrayList<Transaction> completedRequests;
 
     public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Log Out For Exit", Toast.LENGTH_SHORT).show();
     }
 
     @Override

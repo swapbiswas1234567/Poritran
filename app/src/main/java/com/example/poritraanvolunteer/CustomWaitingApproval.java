@@ -64,13 +64,11 @@ public class CustomWaitingApproval extends BaseAdapter {
         final TextView nameTxt = view.findViewById(R.id.nameWA);
         final TextView phoneTxt = view.findViewById(R.id.phoneWA);
         final TextView idTxt = view.findViewById(R.id.idWA);
-        final TextView nidTxt = view.findViewById(R.id.nidWA);
         final TextView addressTxt = view.findViewById(R.id.addressWA);
         final TextView memberTxt = view.findViewById(R.id.memberWA);
         final TextView amountTxt = view.findViewById(R.id.amountWA);
         final TextView commentTxt = view.findViewById(R.id.commentWA);
         final Button cancelBtn = view.findViewById(R.id.cancelWA);
-        final ImageView photoImg = view.findViewById(R.id.photoWA);
 
         Transaction t = tempList.get(i);
         final String reqId = t.getReqId();
@@ -79,13 +77,12 @@ public class CustomWaitingApproval extends BaseAdapter {
         nameTxt.setText(t.getName());
         phoneTxt.setText(t.getPhoneNo());
         idTxt.setText(t.getReqId());
-        nidTxt.setText(t.getNid());
         addressTxt.setText(t.getPresentAddress());
         memberTxt.setText(t.getFamilyMember() + "");
         amountTxt.setText(t.getAmount() + "");
         commentTxt.setText(t.getComment());
-        String link=t.getReqUri();
-        Picasso.with(context).load(link).fit().into(photoImg);
+        //String link=t.getReqUri();
+        //Picasso.with(context).load(link).fit().into(photoImg);
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override

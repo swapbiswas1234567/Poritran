@@ -1,68 +1,38 @@
 package com.example.poritraanvolunteer;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
 import static maes.tech.intentanim.CustomIntent.customType;
+
 
 public class AddRequest extends AppCompatActivity {
 
     TextView post,available;
-    ImageView doneePhoto;
-    Button upload,rotateButton;
     Button home, up, pending, approved, my, logout;
 
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri mImageUri;
-    private StorageReference mStorageRef;
     private DatabaseReference mDataBaseRef;
     private ProgressDialog progressDialog;
     private EditText nid, name, phoneno, presentaddress,familymember, amount, comment;
     private LinearLayout viewHolder;
 
     long MAX_REQ_COUNT, MAX_REQ_AMOUNT, PENDING_COUNT=0;
-
-    private ArrayList<String> allPendingnid;
 
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "Log Out For Exit", Toast.LENGTH_SHORT).show();
@@ -75,8 +45,6 @@ public class AddRequest extends AppCompatActivity {
 
         init();
         setLimits();
-        post.setEnabled(false);
-        rotateButton.setEnabled(false);
 
         /*ADDING LISTENER TO UPLOAD(up) BUTTON STARTS*/
         up.setOnClickListener(new View.OnClickListener() {
@@ -84,30 +52,6 @@ public class AddRequest extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(AddRequest.this,SubmitPhoto.class);
                 startActivity(intent);
-            }
-        });
-        /*ADDING LISTENER TO UPLOAD(up) BUTTON ENDS*/
-
-        /*ADDING LISTENER TO ROTATE BUTTON STARTS*/
-        rotateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*THIS IS THE CODE FOR ROTATING THE IMAGE ON THE IMAGE VIEW*/
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                Bitmap bitmapOrg = ((BitmapDrawable) doneePhoto.getDrawable()).getBitmap();
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmapOrg, 200, 200, true);
-                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-                doneePhoto.setImageBitmap(rotatedBitmap);
-            }
-        });
-        /*ADDING LISTENER TO ROTATE BUTTON ENDS*/
-
-
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
             }
         });
 
@@ -129,6 +73,7 @@ public class AddRequest extends AppCompatActivity {
                     return;
                 }
                 if(validation()){
+                    Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_SHORT).show();
                     postRequest();
                 }
             }
@@ -146,6 +91,7 @@ public class AddRequest extends AppCompatActivity {
         pending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
                 startActivity(intent);
                 customType(AddRequest.this, "left-to-right");
@@ -155,27 +101,30 @@ public class AddRequest extends AppCompatActivity {
         approved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddRequest.this, Approved.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(AddRequest.this, Approved.class);
                 startActivity(intent);
-                customType(AddRequest.this, "left-to-right");
+                customType(AddRequest.this, "left-to-right");*/
             }
         });
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddRequest.this, SubmitPhoto.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(AddRequest.this, SubmitPhoto.class);
                 startActivity(intent);
-                customType(AddRequest.this, "left-to-right");
+                customType(AddRequest.this, "left-to-right");*/
             }
         });
 
         my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddRequest.this, MyWork.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(AddRequest.this, MyWork.class);
                 startActivity(intent);
-                customType(AddRequest.this, "left-to-right");
+                customType(AddRequest.this, "left-to-right");*/
             }
         });
 
@@ -188,6 +137,7 @@ public class AddRequest extends AppCompatActivity {
                         "Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                FunctionVariable.NID = "NULL";
                                 Intent intent = new Intent(AddRequest.this, MainActivity.class);
                                 startActivity(intent);
                             }
@@ -199,8 +149,6 @@ public class AddRequest extends AppCompatActivity {
     }
 
     private void init(){
-        rotateButton=findViewById(R.id.rotateButtonAddReq);
-        nid = findViewById(R.id.nidEdt);
         name = findViewById(R.id.nameEdt);
         phoneno = findViewById(R.id.phoneEdt);
         presentaddress = findViewById(R.id.addressEdt);
@@ -211,8 +159,6 @@ public class AddRequest extends AppCompatActivity {
 
         post = findViewById(R.id.postAddReq);
         available = findViewById(R.id.availableAddReq);
-        doneePhoto = findViewById(R.id.doneePhotoAddReq);
-        upload = findViewById(R.id.uploadAddReq);
 
         home = findViewById(R.id.homeAR);
         pending = findViewById(R.id.pendingAR);
@@ -225,60 +171,13 @@ public class AddRequest extends AppCompatActivity {
 
         viewHolder.setVisibility(View.INVISIBLE);
         available.setText("");
-
-        allPendingnid = new ArrayList<>();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data!= null && data.getData()!= null){
-            //mImageUri = data.getData();
-            //Picasso.with(this).load(mImageUri).into(doneePhoto);
-            try {
-                /*Get the Uniform Resource Identifier of the image*/
-                final Uri imageUri = data.getData();
-                /*Create an input stream from the image uri*/
-                final InputStream imageStream = AddRequest.this.getContentResolver().openInputStream(imageUri);
-                /*Get the data from the input stream into the butmap*/
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                /*Resize the image and place it on another bitmap*/
-                Bitmap resizedBitmap = Bitmap.createScaledBitmap(
-                        selectedImage, 200, 200, false);//RESIZED TO 200 by 200
-                /*Place the image on imageview*/
-                doneePhoto.setImageBitmap(resizedBitmap);
-                post.setEnabled(!false);
-                rotateButton.setEnabled(true);
-                Log.d("TAG1","Set Image in bitmap");
-                /*currentUploadButton.setEnabled(true);
-                currentRotateButton.setEnabled(true);*/
-                /*uploadImageButton.setEnabled(true);
-                rotateImageButton.setEnabled(true);*/
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(AddRequest.this, "Something went wrong", Toast.LENGTH_LONG).show();
-            }
-
-        }
-
-        else{
-            toast("No Image Selected");
-        }
-    }
-
-    private void chooseImage(){
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-
-    }
 
     private void uploadRequest(){
-        if(true){//CHANGED
+            mDataBaseRef = FirebaseDatabase.getInstance().getReference("Request/" + FunctionVariable.NID);
             final String VOL_NID = FunctionVariable.NID;
-            final String NID = nid.getText().toString().trim();
             final String NAME = name.getText().toString().trim();
             final String PHONENO = phoneno.getText().toString().trim();
             final String ADDRESS = presentaddress.getText().toString().trim();
@@ -287,52 +186,13 @@ public class AddRequest extends AppCompatActivity {
             final String COMMENT = comment.getText().toString().trim();
             final String key = mDataBaseRef.push().getKey();
 
-            /*Converting the Image from image view into a byte array*/
-            doneePhoto.setDrawingCacheEnabled(true);
-            doneePhoto.buildDrawingCache();
-            Bitmap bitmap = ((BitmapDrawable) doneePhoto.getDrawable()).getBitmap();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 65, baos);
-            byte[] data = baos.toByteArray();
+            Transaction t = new Transaction(VOL_NID,"","",NAME,PHONENO,ADDRESS,MEMBER,AMOUNT,COMMENT,key);
+            mDataBaseRef.child(key).setValue(t);
+            toast("Your request has been posted for donation");
+            Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
+            startActivity(intent);
+            customType(AddRequest.this, "left-to-right");
 
-            final StorageReference fileReference = mStorageRef.child(key + ".jpg" );
-            Log.d("TAGA","About to put data inside");
-            fileReference.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String reqUri = uri.toString();
-                            //Log.d("TAG2","reqUri="+reqUri);
-                            Transaction t = new Transaction(VOL_NID,reqUri,NID,NAME,PHONENO,ADDRESS,MEMBER,AMOUNT,COMMENT,key);
-                            mDataBaseRef.child(key).setValue(t);
-                            progressDialog.dismiss();
-                            toast("Your request has been posted for donation");
-                            Intent intent = new Intent(AddRequest.this, WaitingForApproval.class);
-                            startActivity(intent);
-                            customType(AddRequest.this, "left-to-right");
-
-                        }
-                    });
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    toast(e.getMessage());
-                    progressDialog.dismiss();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.setMessage("Your Request Is In Queue");
-                    progressDialog.setTitle("Please Wait");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                }
-            });
-        }
     }
 
     private void setLimits(){
@@ -381,8 +241,6 @@ public class AddRequest extends AppCompatActivity {
                     Transaction t = i.getValue(Transaction.class);
                     if(t.getStatus()==0){
                         PENDING_COUNT++;
-                        allPendingnid.add(t.getNid());
-                        ///Toast.makeText(getApplicationContext(), PENDING_COUNT + " " + MAX_REQ_COUNT + " " + MAX_REQ_AMOUNT, Toast.LENGTH_SHORT).show();
                     }
                 }
                 setTotalAvailableRequest();
@@ -399,18 +257,8 @@ public class AddRequest extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private String getFileExtension(Uri uri){
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-    }
-
-
-
-
 
     boolean validation(){
-        String NID = nid.getText().toString().trim();
         String NAME = name.getText().toString().trim();
         String PHONENO = phoneno.getText().toString().trim();
         String ADDRESS = presentaddress.getText().toString().trim();
@@ -419,24 +267,6 @@ public class AddRequest extends AppCompatActivity {
 
         int max = Integer.MAX_VALUE;
         long MAX = (long)max;
-
-        /*if(mImageUri==null){
-            toast("You Must Upload A Photo Of The Requester");
-            return false;
-        }*/
-
-        if(NID.equals("")){
-            nid.setError("Requestor's NID Number Must Be Filled Up!");
-            return false;
-        }
-
-        int len = allPendingnid.size();
-        for(int i=0; i<len; i++){
-            if(allPendingnid.get(i).equals(NID)){
-                nid.setError("This NID has already a pending request by you");
-                return false;
-            }
-        }
 
         if(NAME.equals("")){
             name.setError("Requestor's Name Must Be Filled Up!");
@@ -477,15 +307,11 @@ public class AddRequest extends AppCompatActivity {
             amount.setError("Requested Amount Can't Be Greater Than " + MAX_REQ_AMOUNT);
             return false;
         }
-
-
-
         return true;
     }
 
     private void postRequest(){
         String NID = FunctionVariable.NID;
-        mStorageRef = FirebaseStorage.getInstance().getReference("Request/" + NID);
         mDataBaseRef = FirebaseDatabase.getInstance().getReference("Request/" + NID);
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(AddRequest.this);
@@ -512,6 +338,4 @@ public class AddRequest extends AppCompatActivity {
         AlertDialog alert11 = builder1.create();
         alert11.show();
     }
-
-
 }

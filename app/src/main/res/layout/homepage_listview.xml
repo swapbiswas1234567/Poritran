@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="#fff"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/nameWA"
+            android:id="@+id/nameHPL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Swapnil Biswas"
@@ -28,7 +28,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/phoneWA"
+            android:id="@+id/phoneHPL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="01759957277"
@@ -48,7 +48,7 @@
             android:textColor="#000"/>
 
         <TextView
-            android:id="@+id/idWA"
+            android:id="@+id/idHPL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:textColor="#000"/>
 
         <TextView
-            android:id="@+id/addressWA"
+            android:id="@+id/addressHPL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:textColor="#000"/>
 
         <TextView
-            android:id="@+id/memberWA"
+            android:id="@+id/memberHPL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
             android:textColor="#000"/>
 
         <TextView
-            android:id="@+id/amountWA"
+            android:id="@+id/amountHPL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,7 +128,67 @@
             android:textColor="#000"/>
 
         <TextView
-            android:id="@+id/commentWA"
+            android:id="@+id/commentHPL"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volunteer Name"
+            android:fontFamily="serif"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#009688"/>
+
+        <TextView
+            android:id="@+id/volunteerNameHPL"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volunteer Contact No"
+            android:fontFamily="serif"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#009688"/>
+
+        <TextView
+            android:id="@+id/volunteerContactHPL"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="123456"
+            android:fontFamily="serif"
+            android:textSize="17sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volunteer Contact No"
+            android:fontFamily="serif"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#009688"/>
+
+        <TextView
+            android:id="@+id/volunteerMailHPL"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,12 +198,12 @@
             android:textColor="#000"/>
 
         <Button
-            android:id="@+id/cancelWA"
+            android:id="@+id/donateHPL"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="15dp"
-            android:background="#EA1D1D"
-            android:text="CANCEL REQUEST"
+            android:background="#4CAF50"
+            android:text="DONATE"
             android:fontFamily="serif"
             android:textColor="#fff"/>
 

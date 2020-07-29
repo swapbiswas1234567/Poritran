@@ -64,8 +64,7 @@
             android:gravity="center_vertical"
             android:textColor="#000"
             android:textSize="15sp"
-            android:layout_marginRight="25dp"
-            tools:ignore="RtlCompat" />
+            android:layout_marginRight="25dp" />
 
     </LinearLayout>
 
@@ -95,71 +94,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Requester's Photo"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    android:fontFamily="serif"
-                    android:textStyle="italic" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/borderblack">
-                    <ImageView
-                        android:id="@+id/doneePhotoAddReq"
-                        android:layout_margin="2dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/background"/>
-
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/rotateButtonAddReq"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Rotate Image"
-                    android:textColor="#fff"
-                    android:fontFamily="serif"
-                    android:background="#3E4EA2"/>
-
-                <Button
-                    android:id="@+id/uploadAddReq"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="CHOOSE PHOTO"
-                    android:textColor="#fff"
-                    android:fontFamily="serif"
-                    android:background="#3E4EA2"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Requester's NID"
-                    android:layout_marginTop="30dp"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    android:fontFamily="serif"
-                    android:textStyle="italic" />
-
-                <EditText
-                    android:id="@+id/nidEdt"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:textColor="#000"
-                    android:fontFamily="serif"
-                    android:background="@drawable/borderblack"
-                    android:singleLine="true"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Requester's Name"
+                    android:text="Recipient's Name"
                     android:layout_marginTop="20dp"
                     android:textColor="#000"
                     android:textSize="14sp"
@@ -180,7 +115,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Requester's Phone No"
+                    android:text="Recipient's Phone No"
                     android:layout_marginTop="20dp"
                     android:textColor="#000"
                     android:textSize="14sp"
@@ -203,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="serif"
-                    android:text="Requester's Present Address"
+                    android:text="Recipient's Present Address"
                     android:textColor="#000"
                     android:textSize="14sp"
                     android:textStyle="italic" />
@@ -222,7 +157,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Requester's Number of Family Member"
+                    android:text="Recipient's Number of Family Member"
                     android:layout_marginTop="20dp"
                     android:textColor="#000"
                     android:textSize="14sp"

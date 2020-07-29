@@ -71,27 +71,30 @@ public class WaitingForApproval extends AppCompatActivity {
         approved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WaitingForApproval.this, Approved.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(WaitingForApproval.this, Approved.class);
                 startActivity(intent);
-                customType(WaitingForApproval.this, "left-to-right");
+                customType(WaitingForApproval.this, "left-to-right");*/
             }
         });
 
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WaitingForApproval.this, SubmitPhoto.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(WaitingForApproval.this, SubmitPhoto.class);
                 startActivity(intent);
-                customType(WaitingForApproval.this, "left-to-right");
+                customType(WaitingForApproval.this, "left-to-right");*/
             }
         });
 
         my.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WaitingForApproval.this, MyWork.class);
+                Toast.makeText(getApplicationContext(), "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(WaitingForApproval.this, MyWork.class);
                 startActivity(intent);
-                customType(WaitingForApproval.this, "left-to-right");
+                customType(WaitingForApproval.this, "left-to-right");*/
             }
         });
 
