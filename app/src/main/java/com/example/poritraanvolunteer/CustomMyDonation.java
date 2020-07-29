@@ -24,20 +24,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class CustomMyWork extends BaseAdapter {
+public class CustomMyDonation extends BaseAdapter {
     Context context;
     LayoutInflater inflater;
     List<Transaction> tempList;
     ArrayList<Transaction> mainList;
-    TextView noOfReq;
 
-    public CustomMyWork(Context context, List<Transaction> tempList, TextView t){
+    public CustomMyDonation(Context context, List<Transaction> tempList) {
         this.context = context;
         this.tempList = tempList;
         inflater = LayoutInflater.from(context);
         this.mainList = new ArrayList<>();
         this.mainList.addAll(tempList);
-        this.noOfReq = t;
     }
 
     @Override
@@ -60,51 +58,38 @@ public class CustomMyWork extends BaseAdapter {
         final int i = position;
         if(view==null){
             inflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view=inflater.inflate(R.layout.mywork_listview,parent,false);
+            view=inflater.inflate(R.layout.my_donation_listview,parent,false);
         }
 
-        final TextView nameTxt = view.findViewById(R.id.nameMWL);
-        final TextView phoneTxt = view.findViewById(R.id.phoneMWL);
-        final TextView idTxt = view.findViewById(R.id.idMWL);
-        final TextView nidTxt = view.findViewById(R.id.nidMWL);
-        final TextView addressTxt = view.findViewById(R.id.addressMWL);
-        final TextView memberTxt = view.findViewById(R.id.memberMWL);
-        final TextView amountTxt = view.findViewById(R.id.amountMWL);
-        final TextView commentTxt = view.findViewById(R.id.commentMWL);
-        //final Button cancelBtn = view.findViewById(R.id.cancelAL);
-        final ImageView photoImg = view.findViewById(R.id.photoMWL);
-        final TextView donorNameTxt = view.findViewById(R.id.donorNameMWL);
-        final TextView donorAddTxt = view.findViewById(R.id.donorAddressMWL);
-        final TextView donorPhoneTxt = view.findViewById(R.id.donorContactMWL);
-        final TextView donorEmailTxt = view.findViewById(R.id.donorEmailMWL);
+        final TextView nameTxt = view.findViewById(R.id.nameMDL);
+        final TextView phoneTxt = view.findViewById(R.id.phoneMDL);
+        final TextView idTxt = view.findViewById(R.id.idMDL);
+        final TextView volunteerTxt = view.findViewById(R.id.volunteerMDL);
+        final TextView addressTxt = view.findViewById(R.id.addressMDL);
+        final TextView memberTxt = view.findViewById(R.id.memberMDL);
+        final TextView amountTxt = view.findViewById(R.id.amountMDL);
+        final TextView commentTxt = view.findViewById(R.id.commentMDL);
+        final ImageView photoImg = view.findViewById(R.id.photoMDL);
 
         Transaction t = tempList.get(i);
-        final Transaction tCopy = t;
         final String reqId = t.getReqId();
-        final String donorNid = t.getDonatedByNid();
 
-        noOfReq.setText(tempList.size() + "");
         nameTxt.setText(t.getName());
         phoneTxt.setText(t.getPhoneNo());
         idTxt.setText(t.getReqId());
-        nidTxt.setText(t.getNid());
         addressTxt.setText(t.getPresentAddress());
         memberTxt.setText(t.getFamilyMember() + "");
         amountTxt.setText(t.getAmount() + "");
         commentTxt.setText(t.getComment());
-        donorNameTxt.setText(t.getDonatedByName());
         String link=t.getConfirmationUri();
         Picasso.with(context).load(link).fit().into(photoImg);
 
-        DatabaseReference d = FirebaseDatabase.getInstance().getReference("user/"+donorNid);
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("user/"+t.getVolNid()+"/name");
         d.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user u = dataSnapshot.getValue(user.class);
-                donorAddTxt.setText(u.getAddress());
-                donorPhoneTxt.setText(u.getContact());
-                donorEmailTxt.setText(u.getMail());
-                donorNameTxt.setText(u.getName());
+                String vol = dataSnapshot.getValue(String.class);
+                volunteerTxt.setText(vol);
             }
 
             @Override

@@ -365,8 +365,6 @@ public class AddRequest extends AppCompatActivity {
     }
 
     void setTotalAvailableRequest(){
-
-        toast(FunctionVariable.NID);
         available.setText((MAX_REQ_COUNT - PENDING_COUNT) + "");
         if(MAX_REQ_COUNT - PENDING_COUNT != 0){
             viewHolder.setVisibility(View.VISIBLE);

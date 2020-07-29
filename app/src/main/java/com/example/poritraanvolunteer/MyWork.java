@@ -26,7 +26,7 @@ import static maes.tech.intentanim.CustomIntent.customType;
 public class MyWork extends AppCompatActivity {
 
     Button home, add, pending, up, approved, logout;
-    TextView noOfReq, refresh;
+    TextView noOfReq, refresh, name;
     ListView lView;
     ArrayList<Transaction> completedRequests;
 
@@ -41,6 +41,7 @@ public class MyWork extends AppCompatActivity {
 
         init();
         retrieveCompletedRequests();
+        retrieveName();
 
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,8 @@ public class MyWork extends AppCompatActivity {
 
         lView = findViewById(R.id.lViewMW);
         completedRequests = new ArrayList<>();
+
+        name = findViewById(R.id.myNameMW);
     }
 
     void retrieveCompletedRequests(){
@@ -140,9 +143,25 @@ public class MyWork extends AppCompatActivity {
                     if(t.getStatus()==3)    completedRequests.add(t);
                 }
                 noOfReq.setText(completedRequests.size()+"");
-                CustomApproved c = new CustomApproved(MyWork.this, completedRequests, noOfReq);
+                CustomMyWork c = new CustomMyWork(MyWork.this, completedRequests, noOfReq);
                 lView.setAdapter(c);
                 refresh.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    void retrieveName(){
+        DatabaseReference d = FirebaseDatabase.getInstance().getReference("user/"+FunctionVariable.NID+"/name");
+        d.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String nameString = dataSnapshot.getValue(String.class);
+                name.setText(nameString);
             }
 
             @Override

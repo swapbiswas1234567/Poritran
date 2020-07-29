@@ -107,6 +107,7 @@ public class CustomApproved extends BaseAdapter {
                 donorAddTxt.setText(u.getAddress());
                 donorPhoneTxt.setText(u.getContact());
                 donorEmailTxt.setText(u.getMail());
+                donorNameTxt.setText(u.getName());
             }
 
             @Override
@@ -149,7 +150,7 @@ public class CustomApproved extends BaseAdapter {
                                 notifyDataSetChanged();
                                 noOfReq.setText(tempList.size() + "");
                                 DatabaseReference d = FirebaseDatabase.getInstance().getReference("Request/"+FunctionVariable.NID+"/"+reqId+"/status");
-                                d.setValue(0);
+                                d.setValue(-1);
                                 DatabaseReference d2 = FirebaseDatabase.getInstance().getReference("NotReceived/"+tCopy.getVolNid()+"/"+tCopy.getReqId());
                                 d2.setValue(tCopy);
                             }

@@ -180,16 +180,18 @@ public class CustomAdapter2 extends BaseAdapter {
                                 /*setting the status of that request tree to  3*/
                                 DatabaseReference myReference=firebaseDatabase.getReference
                                         ("Request/"+volunteerNid+"/"+reqId);
-                                myReference.child("status").setValue("3");
+                                myReference.child("status").setValue(3);
+                                myReference.child("confirmationUri").setValue(downloadUri);
                                 /*CODE FOR COPYING THE TREE*/
                                 /*getting reference to the new root*/
                                 FirebaseDatabase firebaseDatabase2=FirebaseDatabase.getInstance();
                                 DatabaseReference myReference2=firebaseDatabase.getReference
-                                        ("CompletedDonations/"+FunctionVariable.NID+"/"+reqId);
+                                        ("CompletedDonations/"+donorNidArrayList.get(position)+"/"+reqId);
+
+                                Transaction t = transactionArrayList.get(position);
 
                                 myReference2.child("amount").setValue(transactionArrayList.get(position).amount);
                                 myReference2.child("comment").setValue(transactionArrayList.get(position).comment);
-                                myReference2.child("confirmationUri").setValue("");
                                 myReference2.child("donatedByName").setValue(donorNameArrayList.get(position));
                                 myReference2.child("donatedByNid").setValue(donorNidArrayList.get(position));
                                 myReference2.child("familyMember").setValue(transactionArrayList.get(position).familyMember);
@@ -199,10 +201,10 @@ public class CustomAdapter2 extends BaseAdapter {
                                 myReference2.child("presentAddress").setValue(transactionArrayList.get(position).presentAddress);
                                 myReference2.child("reqId").setValue(transactionArrayList.get(position).reqId);
                                 myReference2.child("reqUri").setValue(transactionArrayList.get(position).reqUri);
-                                myReference2.child("shared").setValue(transactionArrayList.get(position).shared);
-                                myReference2.child("status").setValue("3");
+                                myReference2.child("shared").setValue(0);
+                                myReference2.child("status").setValue(3);
                                 myReference2.child("volNid").setValue(transactionArrayList.get(position).volNid);
-                                myReference2.child("confirmationPhotoUri").setValue(downloadUri);
+                                myReference2.child("confirmationUri").setValue(downloadUri);
 
 
 

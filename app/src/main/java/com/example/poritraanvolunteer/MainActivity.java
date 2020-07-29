@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         //The remember me checkbox code has been dealt with
                                         FunctionVariable.NID=strNew;
-                                        Intent intent=new Intent(MainActivity.this,AddRequest.class);
+                                        Intent intent=new Intent(MainActivity.this,DonorActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                                         progressBar.setVisibility(View.GONE);
