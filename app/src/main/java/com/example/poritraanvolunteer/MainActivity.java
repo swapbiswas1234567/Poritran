@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox rememberMeCheckBox;
     Button testButton;
     ProgressBar progressBar;
+    Button home;
 
 
     public void onBackPressed() {
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         log_in=findViewById(R.id.log_in);
         forgot=findViewById(R.id.forgot);
         sign_up=findViewById(R.id.sign_up);
+        home=findViewById(R.id.home);
 
 
         String remeber;
@@ -93,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FunctionVariable.NID="NULL";
+                Intent intent=new Intent(MainActivity.this,DonorActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
