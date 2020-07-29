@@ -1,8 +1,8 @@
 package com.example.poritraanvolunteer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox rememberMeCheckBox;
     Button testButton;
     ProgressBar progressBar;
+    Button home;
 
 
     public void onBackPressed() {
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         //Intent intent = new Intent(MainActivity.this, AddRequest.class);
         //startActivity(intent);
         progressBar=findViewById(R.id.progressBar);
@@ -54,6 +57,23 @@ public class MainActivity extends AppCompatActivity {
         log_in=findViewById(R.id.log_in);
         forgot=findViewById(R.id.forgot);
         sign_up=findViewById(R.id.sign_up);
+        home=findViewById(R.id.home);
+
+
+        String remeber;
+        SharedPreferences sharedPreferences=getSharedPreferences("rememberFile",MODE_PRIVATE);
+
+        remeber =sharedPreferences.getString("nid_login","123");
+        if (remeber.equals("123"))
+        {
+
+        }
+        else
+        {
+            id.setText(remeber);
+        }
+
+
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FunctionVariable.NID="NULL";
+                Intent intent=new Intent(MainActivity.this,DonorActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
         log_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,6 +193,14 @@ public class MainActivity extends AppCompatActivity {
                                         Intent intent=new Intent(MainActivity.this,AddRequest.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+                                        SharedPreferences sharedPreferences3=getSharedPreferences("rememberFile",MODE_PRIVATE);
+                                        SharedPreferences.Editor editor2=sharedPreferences3.edit();
+                                        editor2.putString("nid_login",strNew);
+
+
+                                        editor2.apply();
+
+
                                         progressBar.setVisibility(View.GONE);
                                         startActivity(intent);
                                         //
@@ -206,6 +244,30 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
+//        // If you don't have res/menu, just create a directory named "menu" inside res
+//        getMenuInflater().inflate(R.menu.home_button, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    // handle button activities
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.mybutton) {
+//            Intent intent=new Intent(getApplicationContext(),DonorActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            // do something here
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
 
     @Override
     protected void onStop() {
