@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -74,6 +75,8 @@ public class AddRequest extends AppCompatActivity {
 
         init();
         setLimits();
+        post.setEnabled(false);
+        rotateButton.setEnabled(false);
 
         /*ADDING LISTENER TO UPLOAD(up) BUTTON STARTS*/
         up.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,21 @@ public class AddRequest extends AppCompatActivity {
             }
         });
         /*ADDING LISTENER TO UPLOAD(up) BUTTON ENDS*/
+
+        /*ADDING LISTENER TO ROTATE BUTTON STARTS*/
+        rotateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*THIS IS THE CODE FOR ROTATING THE IMAGE ON THE IMAGE VIEW*/
+                Matrix matrix = new Matrix();
+                matrix.postRotate(90);
+                Bitmap bitmapOrg = ((BitmapDrawable) doneePhoto.getDrawable()).getBitmap();
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmapOrg, 200, 200, true);
+                Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+                doneePhoto.setImageBitmap(rotatedBitmap);
+            }
+        });
+        /*ADDING LISTENER TO ROTATE BUTTON ENDS*/
 
 
         upload.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +199,7 @@ public class AddRequest extends AppCompatActivity {
     }
 
     private void init(){
+        rotateButton=findViewById(R.id.rotateButtonAddReq);
         nid = findViewById(R.id.nidEdt);
         name = findViewById(R.id.nameEdt);
         phoneno = findViewById(R.id.phoneEdt);
@@ -229,6 +248,8 @@ public class AddRequest extends AppCompatActivity {
                         selectedImage, 200, 200, false);//RESIZED TO 200 by 200
                 /*Place the image on imageview*/
                 doneePhoto.setImageBitmap(resizedBitmap);
+                post.setEnabled(!false);
+                rotateButton.setEnabled(true);
                 Log.d("TAG1","Set Image in bitmap");
                 /*currentUploadButton.setEnabled(true);
                 currentRotateButton.setEnabled(true);*/

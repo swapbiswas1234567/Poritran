@@ -185,7 +185,7 @@ public class CustomAdapter2 extends BaseAdapter {
                                 /*getting reference to the new root*/
                                 FirebaseDatabase firebaseDatabase2=FirebaseDatabase.getInstance();
                                 DatabaseReference myReference2=firebaseDatabase.getReference
-                                        ("CompletedDonations/"+FunctionVariable.NID);
+                                        ("CompletedDonations/"+FunctionVariable.NID+"/"+reqId);
 
                                 myReference2.child("amount").setValue(transactionArrayList.get(position).amount);
                                 myReference2.child("comment").setValue(transactionArrayList.get(position).comment);
